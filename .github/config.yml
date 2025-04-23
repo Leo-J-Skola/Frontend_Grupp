@@ -1,5 +1,5 @@
 blank_issues_enabled: false
 contact_links:
   - name: 👀💻Kanban Board Issue Template👏🤙🏻
-    url: https://github.com/Leo-J-Skola/Backend_Grupp/issues/new?template=kanban_issue_template.md
+    url: https://github.com/Leo-J-Skola/Frontend_Grupp/blob/main/.github/ISSUE_TEMPLATE.md
     about: Use this template for issues in the Kanban board.
