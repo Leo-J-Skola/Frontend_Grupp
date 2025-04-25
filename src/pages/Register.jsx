@@ -5,6 +5,9 @@ import { useAuth } from "../hooks/useAuth";
 const Register = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [age, setAge] = useState(0);
+  const [firstName, setFirstName] = useState("");
 
   const navigate = useNavigate();
   // konsumerar contexten
@@ -14,7 +17,7 @@ const Register = () => {
     e.preventDefault();
 
     try {
-      await register(username, password);
+      await register(username, password, email, age, firstName);
       navigate("/login");
     } catch (err) {
       console.log("error: " + err);
@@ -42,6 +45,30 @@ const Register = () => {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="email">Email</label>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="age">Age</label>
+          <input
+            type="number"
+            value={age}
+            onChange={(e) => setAge(e.target.value)}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="firstName">Firstname</label>
+          <input
+            type="text"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
           />
         </div>
         <button type="submit">Register</button>
