@@ -8,8 +8,7 @@ import Unauthorized from "./pages/Unauthorized";
 import AdminDashboard from "./pages/AdminDashboard";
 import { AuthProvider } from "./contexts/AuthContext";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Header from './components/CustomHeader';
-import User from "./pages/User";
+import TopNavbar from "./components/MyNavbar";
 
 
 function App() {
@@ -18,7 +17,7 @@ function App() {
       <AuthProvider>
         <div className="app">
           <main className="main-content">
-              <Header>
+              <TopNavbar>
             <Routes>
               {/* public routes */}
               <Route path="/" element={<Home />} />
@@ -29,7 +28,7 @@ function App() {
               {/* protected routes for all authenticated users */}
               <Route element={<ProtectedRoute />}>
                 <Route path="/profile" element={<Profile />} />
-                <Route path="/user" element={<User />} />
+                {/* <Route path="/user" element={<User />} /> */}
               </Route>
 
               {/* protected routes for admins only */}
@@ -37,7 +36,7 @@ function App() {
                 <Route path="/admin" element={<AdminDashboard />} />
               </Route>
             </Routes>
-            </Header>
+            </TopNavbar>
           </main>
         </div>
         
