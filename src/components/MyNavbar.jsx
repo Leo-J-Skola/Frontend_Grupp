@@ -44,7 +44,7 @@ function TopNavbar() {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-            <Nav.Link href="/login"><Button className='profile-btn'>Login</Button></Nav.Link>
+            <Nav.Link href="/login"><Button className='login-btn'>Login</Button></Nav.Link>
             <Nav.Link href="/register"><Button className='register-btn'>Register</Button></Nav.Link>
               <NavDropdown title="About" id="basic-nav-dropdown">
                 <NavDropdown.Item href="/contact">Contact</NavDropdown.Item>

@@ -15,9 +15,9 @@ function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
+        <header><TopNavbar></TopNavbar></header>
         <div className="app">
           <main className="main-content">
-              <TopNavbar>
             <Routes>
               {/* public routes */}
               <Route path="/" element={<Home />} />
@@ -36,10 +36,8 @@ function App() {
                 <Route path="/admin" element={<AdminDashboard />} />
               </Route>
             </Routes>
-            </TopNavbar>
           </main>
         </div>
-        
       </AuthProvider>
     </BrowserRouter>
   );
