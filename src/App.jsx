@@ -8,7 +8,8 @@ import Unauthorized from "./pages/Unauthorized";
 import AdminDashboard from "./pages/AdminDashboard";
 import { AuthProvider } from "./contexts/AuthContext";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import HeaderExample from './components/Header';
+import Header from './components/CustomHeader';
+import User from "./pages/User";
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
       <AuthProvider>
         <div className="app">
           <main className="main-content">
+              <Header>
             <Routes>
               {/* public routes */}
               <Route path="/" element={<Home />} />
@@ -27,7 +29,7 @@ function App() {
               {/* protected routes for all authenticated users */}
               <Route element={<ProtectedRoute />}>
                 <Route path="/profile" element={<Profile />} />
-                {/* <Route path="/user" element={<User />} /> */}
+                <Route path="/user" element={<User />} />
               </Route>
 
               {/* protected routes for admins only */}
@@ -35,8 +37,10 @@ function App() {
                 <Route path="/admin" element={<AdminDashboard />} />
               </Route>
             </Routes>
+            </Header>
           </main>
         </div>
+        
       </AuthProvider>
     </BrowserRouter>
   );

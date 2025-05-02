@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
+import Header from "../components/CustomHeader";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -23,6 +24,8 @@ const Login = () => {
 
   return (
     <div
+    
+    
       className="register-container"
       style={{ width: "40rem", margin: "2rem" }}
     >
