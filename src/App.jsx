@@ -28,7 +28,6 @@ function App() {
               {/* protected routes for all authenticated users */}
               <Route element={<ProtectedRoute />}>
                 <Route path="/profile" element={<Profile />} />
-                {/* <Route path="/user" element={<User />} /> */}
               </Route>
 
               {/* protected routes for admins only */}

@@ -7,11 +7,12 @@ import { useAuth } from '../hooks/useAuth';
 
 function TopNavbarUser() {
 
+const { logout } = useAuth();
+
 const handleLogout = async () => {
     await logout();
 }
 
-const { logout } = useAuth();
 
 return(
       <Navbar bg="light" data-bs-theme="light" expand="lg" className="bg-body-tertiary">

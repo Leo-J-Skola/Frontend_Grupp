@@ -6,3 +6,13 @@ button.login-btn{
     background-color: rgb(155, 155, 155);
     border: 1px solid rgb(46, 46, 46);
 }
+
+.login-container {
+    width: 50%;
+    margin: 1rem;
+}
+
+.form-label{
+    margin: auto;
+    margin-top: 1rem;
+}
