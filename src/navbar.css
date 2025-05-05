@@ -1,0 +1,8 @@
+button.register-btn{
+    background-color: rgb(0, 0, 0);
+    border: none;
+}
+button.login-btn{
+    background-color: rgb(155, 155, 155);
+    border: 1px solid rgb(46, 46, 46);
+}

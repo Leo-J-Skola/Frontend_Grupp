@@ -7,13 +7,16 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Unauthorized from "./pages/Unauthorized";
 import AdminDashboard from "./pages/AdminDashboard";
 import { AuthProvider } from "./contexts/AuthContext";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import HomiHeader from "./components/MyHeader";
+
 
 function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
+        <header><HomiHeader></HomiHeader></header>
         <div className="app">
-          Header
           <main className="main-content">
             <Routes>
               {/* public routes */}
@@ -25,6 +28,7 @@ function App() {
               {/* protected routes for all authenticated users */}
               <Route element={<ProtectedRoute />}>
                 <Route path="/profile" element={<Profile />} />
+                {/* <Route path="/user" element={<User />} /> */}
               </Route>
 
               {/* protected routes for admins only */}
