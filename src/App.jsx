@@ -8,14 +8,14 @@ import Unauthorized from "./pages/Unauthorized";
 import AdminDashboard from "./pages/AdminDashboard";
 import { AuthProvider } from "./contexts/AuthContext";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import TopNavbar from "./components/MyNavbar";
+import HomiHeader from "./components/MyHeader";
 
 
 function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
-        <header><TopNavbar></TopNavbar></header>
+        <header><HomiHeader></HomiHeader></header>
         <div className="app">
           <main className="main-content">
             <Routes>
