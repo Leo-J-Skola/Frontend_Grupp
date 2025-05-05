@@ -22,8 +22,8 @@ return(
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-            <Nav.Link href="/profile"><Button className='profile-btn'>Profile</Button></Nav.Link>
-            <Button className='me-auto' onClick={handleLogout}>Logout</Button>
+            <Nav.Link href="/profile"><Button>Profile</Button></Nav.Link>
+            <Button onClick={handleLogout}>Logout</Button>
               <NavDropdown title="About" id="basic-nav-dropdown">
                 <NavDropdown.Item href="/contact">Contact</NavDropdown.Item>
                 <NavDropdown.Divider />
