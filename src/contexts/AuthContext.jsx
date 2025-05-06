@@ -24,6 +24,7 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   // lagra authenticated user data
   const [currentUser, setCurrentUser] = useState(null);
+  const [currentListing, setCurrentListing] = useState(null);
   // hålla koll på loading state medans vi kollar auth status
   const [loading, setLoading] = useState(true);
 
@@ -117,9 +118,23 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const createListing = async () => {
+    try {
+      await api.post("/listing/create");
+      // create a new listing
+      setCurrentListing(null);
+    } catch (error) {
+      console.error("Listing error", error.response?.data || error.message);
+      // try to create a listing even if backend fails
+      setCurrentListing(null);
+    }
+  };
+
   // skapa context value object med alla auth-relaterade data och metoder
   const value = {
     currentUser,
+    currentListing,
+    createListing,
     login,
     logout,
     register,
