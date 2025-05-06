@@ -1,13 +1,13 @@
 import api from "./axios";
 
-// hämta produkter
-export const getAllProducts = async () => {
-  const response = await api.get("/products");
-  return response.data;
-};
+// get all listings
+export const getAllListings = async () => {
+    const response = await api.get("/listing");
+    return response.data;
+    }
 
-// hämta en produkt med id
-export const getProductById = async (id) => {
-  const response = await api.get(`/products/${id}`);
+// get a specific listing
+export const getListingById = async (id) => {
+  const response = await api.get(`/listing/${id}`);
   return response.data;
 };

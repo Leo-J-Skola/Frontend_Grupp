@@ -1,10 +1,9 @@
-import BasicExample from '../cards/ListingCard';
+import Listing from '../cards/ListingCard';
+import React from 'react';
 
 const Home = () => {
-  
   return(
-    <BasicExample/>
-
+    <Listing/>
   )
 }
 export default Home;
