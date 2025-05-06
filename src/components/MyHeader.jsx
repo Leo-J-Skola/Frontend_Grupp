@@ -16,10 +16,6 @@ const isUser =
 
 return isUser ? <TopNavbarUser/> : <TopNavbarGuest/>;
 
-
-
-
-
 }
 
 export default HomiHeader;

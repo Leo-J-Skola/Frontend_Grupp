@@ -1,5 +1,10 @@
-const Home = () => {
-  return <div><h1>Welcome</h1></div>
-};
+import BasicExample from '../cards/ListingCard';
 
+const Home = () => {
+  
+  return(
+    <BasicExample/>
+
+  )
+}
 export default Home;
