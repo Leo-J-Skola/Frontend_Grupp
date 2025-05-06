@@ -10,6 +10,7 @@ import Listing from "./pages/Listing";
 import { AuthProvider } from "./contexts/AuthContext";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import HomiHeader from "./components/MyHeader";
+import Footer from "./components/Footer";
 
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
               </Route>
             </Routes>
           </main>
+          <Footer/>
         </div>
       </AuthProvider>
     </BrowserRouter>
