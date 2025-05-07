@@ -41,7 +41,7 @@ const NewListing = () => {
             // try catch to debug when submitting
             const success = await createListing(listingData);
             console.log("Listing created successfully:", success);
-            navigate("/listing");
+            navigate("/");
         }
         catch (err) {
             console.error("Error creating listing:", err);
