@@ -9,12 +9,41 @@
 body {
   font-family: Arial, sans-serif;
   line-height: 1.6;
-  
 }
 
 .app {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   min-height: 100vh;
   background-color: #f8f9fa;
+}
+
+.link {
+  text-decoration: none;
+  color: black;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1rem;
+}
+
+.cards {
+  width: 18rem;
+  margin: auto;
+  margin-top: 10px;
+}
+
+.main-content {
+  width: 100%;
 }
