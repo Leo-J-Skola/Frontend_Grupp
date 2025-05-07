@@ -3,7 +3,11 @@ import { Container, Row, Col } from 'react-bootstrap';
 
 const Footer = () => {
   return (
+<<<<<<< HEAD
     <footer className="bg-body-tertiary pt-5" data-bs-theme="light">
+=======
+    <footer>
+>>>>>>> f119835f488c6de22a03c14c1ac68f9348bc2fb3
       <Container>
         {/* Columns */}
         <Row>
