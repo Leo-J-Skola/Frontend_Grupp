@@ -18,6 +18,10 @@ body {
   background-color: #f8f9fa;
 }
 
+.main-content {
+  width: 100%;
+}
+
 .link {
   text-decoration: none;
   color: black;
@@ -38,12 +42,33 @@ body {
   font-size: 1rem;
 }
 
-.cards {
-  width: 18rem;
-  margin: auto;
-  margin-top: 10px;
+.card-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  width: 100%;
 }
 
-.main-content {
+div.card {
   width: 100%;
+  margin-top: 1rem;
+  margin: 0 auto;
+  gap: 2rem;
+}
+
+
+@media (min-width: 394px) {
+  .card-container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    width: 75%;
+    margin-top: 1rem;
+  }
+  div.card {
+    width: calc(20% - 1rem);
+    min-width: 150px;
+  }
 }

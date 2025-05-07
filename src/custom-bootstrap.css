@@ -7,6 +7,12 @@ button.login-btn{
     border: 1px solid rgb(46, 46, 46);
 }
 
+button.logout-btn{
+    margin: 0.5rem;
+    height: 38px;
+    margin-top: 8px;
+}
+
 .login-container {
     width: 35%;
     margin: 1rem;
@@ -15,34 +21,22 @@ button.login-btn{
 .listing-container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    align-items: center;
     margin: 0 auto;
     width: 50%;
     margin-top: 2rem;
-}
+    background-color: lightgray;
 
-.location {
-    width: 80%;
 }
 
 .mb-3{
     width: 80%;
+    text-align: center;
 }
 
-input.form-range {
-    width: 100%;
-}
 
 div {
     margin: 10px;
-}
-
-button.btn-secondary{
-    display: block;
-    text-align: center;
-    margin: 0 auto;
-    width: 75%;
-    margin-top: 2rem;
 }
 
 .nav-buttons button {
@@ -52,3 +46,10 @@ button.btn-secondary{
     border-radius: 4px;
     cursor: pointer;
   }
+
+button.listing-btn {
+    display: block;
+    height: 2.5rem;
+    width: 50%;
+    margin: auto;
+}

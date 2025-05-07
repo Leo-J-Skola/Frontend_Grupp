@@ -24,7 +24,7 @@ return(
             <Nav className="me-auto">
             <Nav.Link href="/profile"><Button>Profile</Button></Nav.Link>
             <Nav.Link href="/listing"><Button>Listing</Button></Nav.Link>
-            <Button variant="secondary" onClick={handleLogout}>Logout</Button>
+            <Button variant="light" className='logout-btn' onClick={handleLogout}>Logout</Button>
               <NavDropdown title="About" id="basic-nav-dropdown">
                 <NavDropdown.Item href="/contact">Contact</NavDropdown.Item>
                 <NavDropdown.Divider />

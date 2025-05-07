@@ -1,5 +1,5 @@
 import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
+import { Card,} from "react-bootstrap";
 import {getAllListings} from "../api/service.js";
 import {useEffect, useState} from "react";
 
@@ -18,12 +18,14 @@ function Listing() {
         fetchListings();
     }, []);
 
+    console.log(listings)
+
     // After loading the listings from the database, it creates a div for each listing
     return (
-        <div className="listing">
+        <div className="card-container">
         {listings.map((listing) => (
-            <Card key={listing.id} style={{width: '100%'}}>
-            <Card.Img variant="top" src={listing.imageUrl} />
+            <Card key={listing.id}>
+            <Card.Img variant="top" src={listing.imageUrl}/>
             <Card.Body>
                 <Card.Title>{listing.title}</Card.Title>
                 <Card.Text><span>{listing.description}</span></Card.Text>
@@ -32,9 +34,11 @@ function Listing() {
                 <Button variant="primary">Go to listing</Button>
             </Card.Body>
             </Card>
+
         ))}
         </div>
     );
 }
+
 
 export default Listing;
