@@ -30,8 +30,8 @@ function Listing() {
                 <Card.Title>{listing.title}</Card.Title>
                 <Card.Text><span>{listing.description}</span></Card.Text>
                 <Card.Text><span> {listing.rooms} rooms</span></Card.Text>
-                <Card.Text><span> {listing.pricePerNight} kr</span></Card.Text>
-                <Button variant="primary">Go to listing</Button>
+                <Card.Text><span> {listing.pricePerNight} kr per natt</span></Card.Text>
+                <Button variant="primary" className='listing-go-btn'>Go to listing</Button>
             </Card.Body>
             </Card>
 

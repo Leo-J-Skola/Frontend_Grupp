@@ -50,7 +50,7 @@ const NewListing = () => {
 
     return (
         <Form className='listing-container'  onSubmit={handleSubmit}>
-            <h2>Listing Page</h2>
+            <h2 className="listing-header">Listing Page</h2>
             <Form.Group className="mb-3" controlId="formBasicTitle">
                 <Form.Label>Listing Title</Form.Label>
                 <Form.Control type="text" required={true} placeholder="Enter Listing Title" value={title} onChange={(e) => setTitle(e.target.value)}/>
