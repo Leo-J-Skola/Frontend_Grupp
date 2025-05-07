@@ -16,6 +16,8 @@ const handleLogout = async () => {
     await logout();
 }
 
+const { currentUser } = useAuth([]);
+
 
 return(
       <Navbar bg="light" data-bs-theme="light" expand="lg" className="bg-body-tertiary">
@@ -45,6 +47,9 @@ return(
             </Form>
             </Nav>
             </Navbar.Collapse>
+            <Navbar.Text>
+            Signed in as: <a href="/profile">{currentUser.username}</a>
+            </Navbar.Text>
             </Container>
             </Navbar>
 )};
