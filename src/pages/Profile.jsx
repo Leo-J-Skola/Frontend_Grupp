@@ -1,20 +1,31 @@
-import { useAuth } from "../hooks/useAuth";
+import { useAuth } from '../hooks/useAuth';
+import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 
 const Profile = () => {
   const { currentUser } = useAuth();
 
   return (
-    <div className="profile">
-      <h1>Your Profile</h1>
-      <div className="user-info">
-        <h2>Account Information</h2>
-        <p>
-          <strong>Username:</strong> {currentUser.username}
-        </p>
-        <p>
-          <strong>Role:</strong> {currentUser.roles.join(", ")}
-        </p>
-      </div>
+    <div className="Container-1 bg-body-tertiary pt-5 " data-bs-theme="light">
+      <Container>
+        <Row className="mb-5">
+          <Col>
+            <h2> Profile </h2>
+            
+          </Col>
+        </Row>
+        <Row className="mb-5">
+          <Col>
+            <h4> Column 2 </h4>
+            
+          </Col>
+        </Row>
+        <Row className="mb-5">
+          <Col>
+            <h4> Column 2 </h4>
+            
+          </Col>
+        </Row>
+      </Container>
     </div>
   );
 };
