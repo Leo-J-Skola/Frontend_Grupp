@@ -71,7 +71,12 @@ const Register = () => {
             onChange={(e) => setFirstName(e.target.value)}
           />
         </div>
-        <button type="submit">Register</button>
+        <div>
+          <button type="submit">Register</button>
+        </div>
+        <div>
+          <a href="/login" class="button">Already have an account?</a>
+        </div>
       </form>
     </div>
   );
