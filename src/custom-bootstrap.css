@@ -7,42 +7,24 @@ button.login-btn{
     border: 1px solid rgb(46, 46, 46);
 }
 
+button.logout-btn{
+    margin: 0.5rem;
+    height: 5%;
+    margin-top: 8px;
+}
+
 .login-container {
     width: 35%;
     margin: 1rem;
 }
 
-.listing-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin: 0 auto;
-    width: 50%;
-    margin-top: 2rem;
-}
-
-.location {
-    width: 80%;
-}
-
 .mb-3{
     width: 80%;
-}
-
-input.form-range {
-    width: 100%;
+    text-align: center;
 }
 
 div {
     margin: 10px;
-}
-
-button.btn-secondary{
-    display: block;
-    text-align: center;
-    margin: 0 auto;
-    width: 75%;
-    margin-top: 2rem;
 }
 
 .nav-buttons button {
@@ -52,3 +34,46 @@ button.btn-secondary{
     border-radius: 4px;
     cursor: pointer;
   }
+
+input.mr-sm-2 {
+    margin: auto;
+    margin-top: 8px;
+}
+
+button.search-btn{
+    margin: auto;
+    width: 5rem;
+    margin-top: 8px;
+}
+
+#basic-nav-dropdown{
+    margin-top: -8px;
+    margin-left: 1rem;
+}
+
+.card-body{
+    line-height: 16px;
+    padding: 0;
+    margin: 0;
+}
+.card{
+    padding:0;
+    margin: 0;
+}
+button.listing-go-btn {
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 5px 5px;
+}
+
+div.me-auto.navbar-nav {
+    justify-content: center;
+    align-items: center;
+}
+
+div.col-auto{
+    justify-content: center;
+    align-items: center;
+}

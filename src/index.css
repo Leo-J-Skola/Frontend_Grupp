@@ -15,7 +15,28 @@ body {
   display: flex;
   flex-direction: row;
   min-height: 100vh;
-  background-color: #f8f9fa;
+  background-color: white;
+  transition: ease-in 2s linear;
+  margin: 0;
+}
+
+.listing-header{
+  margin-top: 1rem;
+}
+
+.main-content {
+  width: 100%;
+}
+
+.listing-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 2rem;
+  background-color: white;
 }
 
 .link {
@@ -33,17 +54,49 @@ body {
 }
 
 .form-group input {
-  width: 100%;
+  width: 50%;
   padding: 0.5rem;
   font-size: 1rem;
 }
 
-.cards {
-  width: 18rem;
-  margin: auto;
-  margin-top: 10px;
+.card-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  width: 100%;
+  gap: 2rem;
 }
 
-.main-content {
+div.card {
   width: 100%;
+  margin-top: 1rem;
+  margin: 0 auto;
+  gap: 2rem;
+}
+
+
+@media (min-width: 394px) {
+  .card-container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 85%;
+    margin-top: 1rem;
+  }
+  div.card {
+    width: calc(15% - 1rem);
+    margin: auto;
+    min-height: 500px;
+  }
+  .listing-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    width: 40%;
+    margin-top: 2rem;
+    background-color: white;
+}
 }
