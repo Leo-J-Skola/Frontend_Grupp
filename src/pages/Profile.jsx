@@ -26,9 +26,20 @@ const Profile = () => {
 
         {/* main content */}
         <Col> 
+
+          {/* favorites */}
+          <Card className="main-card mb-5">
+            <Card.Header>Favorite listings</Card.Header>
+            <Card.Body>
+              <Row>
+                
+              </Row>
+            </Card.Body>
+          </Card>
+
           {/* listings */}
           <Card className="main-card mb-5">
-            <Card.Header>Current listings</Card.Header>
+            <Card.Header>Your current listings</Card.Header>
             <Card.Body>
               <Row>
                 
