@@ -1,0 +1,148 @@
+/* REGISTER BUTTON IN NAVBAR */
+button.register-btn{
+    background-color: rgb(0, 0, 0);
+    border: none;
+}
+/* LOGIN BUTTON IN NAVBAR */
+button.login-btn{
+    background-color: rgb(155, 155, 155);
+    border: 1px solid rgb(46, 46, 46);
+}
+ /* LOGOUT BUTTON IN NAVBAR */
+button.logout-btn{
+    margin: 0.5rem;
+    height: 5%;
+    margin-top: 8px;
+}
+
+/* CONTAINER FOR ALL THE LISTING CARDS */
+.card-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  width: 100%;
+  gap: 2rem;
+}
+
+/* LISTING CARDS INSIDE CARD CONTAINER */
+div.card {
+  width: 100%;
+  margin-top: 1rem;
+  margin: 0 auto;
+  gap: 2rem;
+}
+
+/* LISTING PAGE FORM FIELDS e.g "ENTER LISTING TITLE" */
+.mb-3{
+    width: 80%;
+    text-align: center;
+}
+
+/* MARGIN BETWEEN EVERY DIV */
+div {
+    margin: 10px;
+}
+
+/* NAVIGATION BUTTONS THAT TAKE YOU TO OTHER PAGES + LOGOUT */
+.nav-buttons button {
+    padding: 8px 16px;
+    background: #f0f0f0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+/* "SEARCH" FIELD IN NAVBAR */
+input.mr-sm-2 {
+    margin: auto;
+    margin-top: 8px;
+}
+
+/* SUBMIT BUTTON NEXT TO "SEARCH" FIELD IN NAVBAR */
+button.search-btn{
+    margin: auto;
+    width: 5rem;
+    margin-top: 8px;
+}
+
+/* LISTING PAGE CONTAINER FOR ALL THE FORMS */
+.listing-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 2rem;
+  background-color: white;
+}
+
+/* DROPDOWN "ABOUT" IN HEADER */
+#basic-nav-dropdown{
+    margin-top: -8px;
+    margin-left: 1rem;
+}
+
+/* THE BODY OF THE CARD, IMAGE NOT INCLUDED */
+.card-body{
+    line-height: 16px;
+    padding: 0;
+    margin: 0;
+}
+/* THE WHOLE CARD */
+.card{
+    padding:0;
+    margin: 0;
+}
+
+/* LISTING CARD "SHOW DETAILS BUTTON */
+button.listing-go-btn {
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 5px 5px;
+}
+
+/* NAVBAR NAVIGATION */
+div.me-auto.navbar-nav {
+    justify-content: center;
+    align-items: center;
+}
+
+/* THE WHOLE DIV THAT HOLDS THE SEARCH BAR */
+div.col-auto{
+    justify-content: center;
+    align-items: center;
+}
+
+/* IMPORTANT !!!
+
+EVERYTHING INSIDE THIS MEDIA QUERY ONLY UPDATES THE STYLING OFF THE DESKTOP , NOT MOBILE!*/
+
+@media (min-width: 394px) {
+  .card-container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 85%;
+    margin-top: 1rem;
+  }
+  div.card {
+    width: calc(15% - 1rem);
+    margin:0 auto;
+    min-height: 500px;
+
+  }
+  .listing-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    width: 40%;
+    margin-top: 2rem;
+    background-color: white;
+}
+}
