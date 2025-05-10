@@ -1,6 +1,8 @@
 import api from "./axios";
 import Cookies from "js-cookie";
 
+
+
 // get all listings
 export const getAllListings = async () => {
   const response = await api.get("/listing");
