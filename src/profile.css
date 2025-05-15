@@ -1,0 +1,60 @@
+@import url("https://fonts.googleapis.com/css2?family=Anton+SC&family=Manrope:wght@200..800&display=swap");
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+  }
+
+.profile-page {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.profile-page .profile-card {
+  border-radius: 15px;
+  width: 20rem;
+}
+
+.profile-page .main-card {
+    border-radius: 15px;
+    width: 55rem;
+    min-height: 150px;
+  }
+
+.profile-page .card-header {
+  font-weight: 600;
+  font-size: 1.3rem;
+  background-color: lightgray;
+}
+
+.profile-page .card img {
+  max-width: 175px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: 5px solid lightgray;
+}
+
+.profile-page .card-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.profile-page .card-subtitle {
+  font-size: 1rem;
+  color: black;
+}
+
+.profile-page button {
+  border-radius: 5px;
+  width: 15rem;
+}
+
+@media (max-width: 393px) {
+  .profile-page .profile-card {
+    width: 20rem;
+  }
+
+  .profile-page .main-card {
+    width: 20rem;
+  }
+}
