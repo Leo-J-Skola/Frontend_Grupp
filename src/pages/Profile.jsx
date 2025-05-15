@@ -3,6 +3,7 @@ import { getUserByUserName } from '../api/profileService';
 import { useContext, useEffect, useState } from 'react';
 import { Container, Row, Col, Card, Button, Image } from 'react-bootstrap'; 
 import { AuthContext } from '../contexts/AuthContext'; 
+import { link } from 'react-router-dom';
 
 const Profile = () => {
   const [error, setError] = useState(); // stores errors
@@ -21,7 +22,7 @@ const Profile = () => {
         setUser(userData); // update user state with the fetched data
 
         // user listings data
-
+        
 
         // user bookings data
         
@@ -74,7 +75,9 @@ const Profile = () => {
               <Card.Subtitle className="mb-2">
                 Bio: {" " + user.bio}
               </Card.Subtitle>
+              <Link to="/editProfile">
               <Button variant="primary" className="mt-2">Edit profile</Button>
+              </Link>
             </Card.Body>
           </Card>
         </Col>
