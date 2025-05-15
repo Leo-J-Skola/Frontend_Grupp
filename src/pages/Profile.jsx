@@ -1,5 +1,5 @@
 import '../profile.css';
-import { getUserByUserName } from '../api/profileService';
+import { getUserByUsername } from '../api/profileService';
 import { useContext, useEffect, useState } from 'react';
 import { Container, Row, Col, Card, Button, Image } from 'react-bootstrap'; 
 import { AuthContext } from '../contexts/AuthContext'; 
@@ -16,7 +16,7 @@ const Profile = () => {
 
       try {
         // user data
-        const userData = await getUserByUserName(currentUser.username); 
+        const userData = await getUserByUsername(currentUser.username); 
         console.log(userData); // log userData for debugging
         setUser(userData); // update user state with the fetched data
 
