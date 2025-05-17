@@ -11,6 +11,7 @@ import { AuthProvider } from "./contexts/AuthContext";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import HomiHeader from "./components/MyHeader";
 import Footer from "./components/Footer";
+import ListingPage from "./pages/ListingPage.jsx";
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
               <Route element={<ProtectedRoute />}>
               <Route path="/profile" element={<Profile />} />
               <Route path="/listing" element={<Listing />} />
+                <Route path="/listing/:id" element={<ListingPage />} />
               </Route>
 
               {/* protected routes for admins only */}
