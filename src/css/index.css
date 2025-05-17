@@ -16,7 +16,7 @@ body {
   flex-direction: row;
   min-height: 100vh;
   background-color: white;
-  transition: ease-in 2s linear;
+  transition: ease-in 2s, linear;
   margin: 0;
 }
 
@@ -32,3 +32,5 @@ body {
     width: 35%;
     margin: 1rem;
 }
+
+

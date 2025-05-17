@@ -16,7 +16,7 @@ button.logout-btn{
 }
 
 /* CONTAINER FOR ALL THE LISTING CARDS */
-.card-container {
+/*.card-container {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -26,15 +26,16 @@ button.logout-btn{
   gap: 2rem;
 }
 
-/* LISTING CARDS INSIDE CARD CONTAINER */
+!* LISTING CARDS INSIDE CARD CONTAINER *!
 div.card {
   width: 100%;
   margin-top: 1rem;
   margin: 0 auto;
   gap: 2rem;
-}
+}*/
 
 /* LISTING PAGE FORM FIELDS e.g "ENTER LISTING TITLE" */
+/*CREATE LISTING PAGE*/
 .mb-3{
     width: 80%;
     text-align: center;
@@ -68,6 +69,7 @@ button.search-btn{
 }
 
 /* LISTING PAGE CONTAINER FOR ALL THE FORMS */
+/*CREATE LISTING PAGE*/
 .listing-container {
   display: flex;
   flex-direction: column;
@@ -98,13 +100,13 @@ button.search-btn{
 }
 
 /* LISTING CARD "SHOW DETAILS BUTTON */
-button.listing-go-btn {
+/*button.listing-go-btn {
     position: absolute;
     bottom: 5px;
     left: 50%;
     transform: translateX(-50%);
     padding: 5px 5px;
-}
+}*/
 
 /* NAVBAR NAVIGATION */
 div.me-auto.navbar-nav {
@@ -124,18 +126,25 @@ EVERYTHING INSIDE THIS MEDIA QUERY ONLY UPDATES THE STYLING OFF THE DESKTOP , NO
 
 @media (min-width: 394px) {
   .card-container{
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     flex-direction: row;
     flex-wrap: wrap;
-    width: 85%;
-    margin-top: 1rem;
+    width: 80%;
+    max-width: 1400px;
+    justify-content: center;
+    margin: 0 auto;
+    gap: 0.5rem;
   }
+
   div.card {
-    width: calc(15% - 1rem);
-    margin:0 auto;
-    min-height: 500px;
+  max-width: 400px;
+
+  margin:0 auto;
+  min-height: 500px;
 
   }
+  /*CREATE LISTING PAGE*/
   .listing-container {
     display: flex;
     flex-direction: column;

@@ -1,11 +1,13 @@
 import { Button, Card, Modal } from "react-bootstrap";
 import { getAllListings } from "../api/service.js";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 // First get all listings from the /listing endpoint
 // then i used map to go through all the listings from the database
 // and display them as a card by creating a div for each listing it found
 function Listing() {
+    const navigate = useNavigate();
     const [listings, setListings] = useState([]);
     const [viewListing, clickViewListing] = useState(false);
     const [listingId, setListingId] = useState(null);
@@ -34,7 +36,9 @@ function Listing() {
                         <Card.Text><span>{listing.description}</span></Card.Text>
                         <Card.Text><span>{listing.rooms} rooms</span></Card.Text>
                         <Card.Text><span>{listing.pricePerNight} kr per natt</span></Card.Text>
-                        <Button variant="primary" className="listing-go-btn" onClick={() => expandListing(listing.id)}>Show Details</Button>
+                        <Button variant="primary" className="listing-go-btn" onClick={() => expandListing(listing.id)}>Quick book</Button>
+
+                        <Button variant="primary" className="listing-go-btn-2" onClick={() => navigate("/listing/" + listing.id)}>Go to listing</Button>
                     </Card.Body>
                 </Card>
             ))}
@@ -49,12 +53,12 @@ function Listing() {
                             return (
                                 <div key={listing.id}>
                                     <h2>{listing.title}</h2>
-                                    <img src={listing.imageUrl} alt={listing.title} style={{ width: '100%' }} />
+                                    <img src={listing.imageUrl} />
                                     <p>{listing.description}</p>
                                     <p>Rooms: {listing.rooms}</p>
-                                    <p>Price per night: {listing.pricePerNight} kr, {/* This is a default number that will change depending on the amount of days you book */}</p>
+                                    <p>Price per night: {listing.pricePerNight} kr</p>
                                     <p>Location: {listing.location}</p>
-                                    <p>Availability: {/* Maybe add an interactive calendar to pick days you want to book? */}</p>
+                                    <p>Availability: </p>
                                 </div>
                             );
                         }
