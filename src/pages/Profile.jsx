@@ -1,4 +1,5 @@
 import '../profile.css';
+import { Link } from 'react-router-dom';
 import { getUserByUsername } from '../api/profileService';
 import { useContext, useEffect, useState } from 'react';
 import { Container, Row, Col, Card, Button, Image } from 'react-bootstrap'; 
@@ -74,7 +75,11 @@ const Profile = () => {
               <Card.Subtitle className="mb-2">
                 Bio: {" " + user.bio}
               </Card.Subtitle>
-              <Button variant="primary" className="mt-2">Edit profile</Button>
+              <Link to="/edit-user">
+                <Button variant="primary" className="mt-2">
+                  Edit profile
+                </Button>
+              </Link>
             </Card.Body>
           </Card>
         </Col>

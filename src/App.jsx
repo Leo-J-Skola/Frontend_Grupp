@@ -3,6 +3,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Profile from "./pages/Profile";
+import EditUser from "./pages/EditUser.jsx";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Unauthorized from "./pages/Unauthorized";
 import AdminDashboard from "./pages/AdminDashboard";
@@ -31,6 +32,7 @@ function App() {
               {/* protected routes for all authenticated users */}
               <Route element={<ProtectedRoute />}>
               <Route path="/profile" element={<Profile />} />
+              <Route path="/edit-user" element={<EditUser />} />
               <Route path="/listing" element={<Listing />} />
                 <Route path="/listing/:id" element={<ListingPage />} />
               </Route>
