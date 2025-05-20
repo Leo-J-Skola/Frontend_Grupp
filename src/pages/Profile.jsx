@@ -1,85 +1,159 @@
-import '../profile.css';
-import { Link } from 'react-router-dom';
-import { getUserByUsername } from '../api/profileService';
-import { useContext, useEffect, useState } from 'react';
-import { Container, Row, Col, Card, Button, Image } from 'react-bootstrap'; 
-import { AuthContext } from '../contexts/AuthContext'; 
+import { Container, Row, Col, Card, Button, Image } from 'react-bootstrap';
+import { useState } from 'react';
+import { useUser } from '../hooks/useUser';
 
 const Profile = () => {
-  const [error, setError] = useState(); // stores errors
-  const [ isLoading, setIsLoading ] = useState(false); // display that the site is loading
-  const { currentUser } = useContext(AuthContext); // gets the user from the auth context
-  const [ user, setUser ] = useState([]); // stores user profile data
+  const { userProfile, updateProfile, loading, error, setError } = useUser();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true); // initialize loading
+  const [isEditing, setIsEditing] = useState(false);
+  const [formData, setFormData] = useState({
+    firstName: userProfile?.firstName || "",
+    lastName: userProfile?.lastName || "",
+    email: userProfile?.email || "",
+    age: userProfile?.age || "",
+    bio: userProfile?.bio || "",
+    profilePic: userProfile?.profilePic || ""
+    });
+    const [success, setSuccess] = useState("");
+
+    const handleEdit = () => {
+      setIsEditing(true);
+    };
+
+    const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+    };
+
+    const handleCancel = () => {
+      setFormData({
+        profilePic: userProfile?.profilePic || "",
+        firstName: userProfile?.firstName || "",
+        lastName: userProfile?.lastName || "",
+        email: userProfile?.email || "",
+        age: userProfile?.age || "",
+        bio: userProfile?.bio || "",
+      })
+
+      setIsEditing(false);
+      setError(null);
+      setSuccess("");
+    };
+
+    const handleSubmit = async () => {
+      e.preventDefault();
+      setError(null);
+      setSuccess("");
 
       try {
-        // user data
-        const userData = await getUserByUsername(currentUser.username); 
-        console.log(userData); // log userData for debugging
-        setUser(userData); // update user state with the fetched data
-
-        // user listings data
-        
-
-        // user bookings data
-        
-
-        // user favorites data
-        
-
+        await updateProfile(formData);
+        setSuccess("Profile updated!")
+        isEditing(false);
       } catch (error) {
-        setError(error.message); // stores the error if the request isnt working
-      } finally {
-        setIsLoading(false); // removes loading
+        console.log("Profile update failed " + error);
       }
     };
 
-    fetchData(); // this executes the data fetching function
-  }, [currentUser?.username]); // this is a dependency array, it will update when the username is changed so that a new profile can be shown
-
-  if (isLoading) {
-    return<div>Loading ...</div>; // displays a message to the end user that the site is currently loading
-  }
-
-  if (error) {
-    return <div>Something went wrong! Please refresh the page.</div> // displays a message to the end user if something went wrong
-  }
-
-  return (
-    <Container className="profile-page mb-5">
+    if (isEditing) {
+      return (
+        <Container className="profile-page mb-5">
       <Row>
         {/* profile information */}
         <Col>
           <Card className="profile-card text-center">
             <Card.Body>
-              <Card.Header>Information</Card.Header>
+              <Card.Header>Your profile</Card.Header>
               <Image 
               src="https://openclipart.org/image/2000px/247319" 
               roundedCircle 
               fluid/>
               <Card.Title className="fullname mb-2">
-                {user.firstName + " " }{ user.lastName} 
+                {userProfile.firstName + " " }{ userProfile.lastName} 
               </Card.Title>
               <Card.Subtitle className="age mb-2">
-                Age: {" " + user.age}
+                Age: {" " + userProfile.age}
               </Card.Subtitle>
               <Card.Subtitle className="mail mb-2">
-                Mail: {" " + user.email}
+                Mail: {" " + userProfile.email}
               </Card.Subtitle>
               <Card.Subtitle className="phone mb-2">
-                Phone: {" " + user.phone}
+                Phone: {" " + userProfile.phone}
               </Card.Subtitle>
               <Card.Subtitle className="mb-2">
-                Bio: {" " + user.bio}
+                Bio: {" " + userProfile.bio}
               </Card.Subtitle>
-              <Link to="/edit-user">
-                <Button variant="primary" className="mt-2">
-                  Edit profile
-                </Button>
-              </Link>
+                <Button variant="edit" onClick={handleEdit} text="Edit profile" disabled={loading}/>
+            </Card.Body>
+          </Card>
+        </Col>
+
+        <Col> 
+          {/* Current listings */}
+          <Card className="main-card mb-5">
+            <Card.Header>Current listings</Card.Header>
+            <Card.Body>
+              <Row>
+                
+              </Row>
+            </Card.Body>
+          </Card>
+
+          {/* Previous bookings */}
+          <Card className="main-card mb-5">
+            <Card.Header>Previous bookings</Card.Header>
+            <Card.Body>
+              <Row>
+                
+              </Row>
+            </Card.Body>
+          </Card>
+
+          {/* Favorite listings */}
+          <Card className="main-card mb-5">
+            <Card.Header>Favorite listings</Card.Header>
+            <Card.Body>
+              <Row>
+                
+              </Row>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
+    </Container>
+      );
+    };
+
+  return (
+   <Container className="profile-page mb-5">
+      <Row>
+        {/* profile information */}
+        <Col>
+          <Card className="profile-card text-center">
+            <Card.Body>
+              <Card.Header>Your profile</Card.Header>
+              <Image 
+              src="https://openclipart.org/image/2000px/247319" 
+              roundedCircle 
+              fluid/>
+              <Card.Title className="fullname mb-2">
+                {userProfile.firstName + " " }{ userProfile.lastName} 
+              </Card.Title>
+              <Card.Subtitle className="age mb-2">
+                Age: {" " + userProfile.age}
+              </Card.Subtitle>
+              <Card.Subtitle className="mail mb-2">
+                Mail: {" " + userProfile.email}
+              </Card.Subtitle>
+              <Card.Subtitle className="phone mb-2">
+                Phone: {" " + userProfile.phone}
+              </Card.Subtitle>
+              <Card.Subtitle className="mb-2">
+                Bio: {" " + userProfile.bio}
+              </Card.Subtitle>
+                <Button variant="edit" onClick={handleEdit} text="Edit profile" disabled={loading}/>
             </Card.Body>
           </Card>
         </Col>
