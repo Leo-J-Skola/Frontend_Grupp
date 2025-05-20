@@ -37,14 +37,12 @@ div.card {
 /* LISTING PAGE FORM FIELDS e.g "ENTER LISTING TITLE" */
 /*CREATE LISTING PAGE*/
 .mb-3{
-    width: 80%;
+    width: 50%;
     text-align: center;
+    margin: auto;
 }
 
-/* MARGIN BETWEEN EVERY DIV */
-div {
-    margin: 10px;
-}
+
 
 /* NAVIGATION BUTTONS THAT TAKE YOU TO OTHER PAGES + LOGOUT */
 .nav-buttons button {
@@ -145,12 +143,12 @@ EVERYTHING INSIDE THIS MEDIA QUERY ONLY UPDATES THE STYLING OFF THE DESKTOP , NO
 
   }
   /*CREATE LISTING PAGE*/
-  .listing-container {
+    .create-listing-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin: 0 auto;
-    width: 40%;
+    width: 60%;
     margin-top: 2rem;
     background-color: white;
 }
