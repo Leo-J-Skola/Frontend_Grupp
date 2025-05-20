@@ -37,30 +37,41 @@ function Listing() {
             throw new Error("Listing not found");
         }
 
+        //If there is no user it alerts the user to log in to make a booking
+
         if(!currentUser) {
             alert("Please log in to make a booking");
         }
 
+        // Because there is a buggy empty availability object,
+        // Right now i gotta use the 2nd availability at index 1
         const firstAvailability = listing.availability[1];
 
+        // Variable for startDate found in the object in the availability array
         const availableStartDate = firstAvailability?.startDate;
-        
+        //Variable for endDate found in the object in the availability array
         const availableEndDate = firstAvailability?.endDate;
-
+        // Method to format the dates correctly for the backend
         const formatDates = (isoString) => {
             return new Date(isoString).toISOString().split('T')[0];
         }
 
         const bookingData = {
-            userId: currentUser.userId,   // or currentUser.id if you want the logged-in user
-            listingId: listingId,
-            startDate: formatDates(availableStartDate),
+            userId: currentUser.userId,   // userId from the currently logged in user
+            listingId: listingId,         // current listing the user wants to book by its id
+            startDate: formatDates(availableStartDate), // dates
             endDate: formatDates(availableEndDate)
         };
+
+        // i console.log the bookingData as a object
         console.log(JSON.parse(JSON.stringify(bookingData)));
         const data = await createBooking(bookingData);
+        // Message if the booking was created successfully
         alert(`Booking successful! ${JSON.stringify(data)}`);
+        // If the booking was succesful the modal is closed again
         closeListing();
+
+        // Error message if the booking was failed
     } catch(error) {
         console.error("Booking failed", error);
         alert("Booking failed, please try again!");
