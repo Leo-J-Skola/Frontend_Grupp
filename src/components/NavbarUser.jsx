@@ -19,6 +19,7 @@ const handleLogout = async () => {
 const { currentUser } = useAuth([]);
 
 
+
 return(
       <Navbar bg="light" data-bs-theme="light" expand="lg" className="bg-body-tertiary">
         <Container>
