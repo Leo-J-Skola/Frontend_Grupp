@@ -3,7 +3,7 @@ import { getAllListings } from "../api/service.js";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createBooking } from "../api/bookingService.js";
-import { useAuth } from "../hooks/useAuth.jsx";
+import { useAuth } from '../hooks/useAuth';
 
 
 // First get all listings from the /listing endpoint
@@ -14,7 +14,7 @@ function Listing() {
     const [listings, setListings] = useState([]);
     const [viewListing, clickViewListing] = useState(false);
     const [listingId, setListingId] = useState(null);
-    const [hostId, setHostId] = useState(null);
+    const { currentUser } = useAuth();
     const closeListing = () => clickViewListing(false);
     const expandListing = (id) => {
         setListingId(id);
@@ -30,21 +30,42 @@ function Listing() {
     }, []);
 
     const handleCreateBooking = async () => {
-        try{
-            const bookingData = {
-                userId: "6810a6eeaeb24f79f6132363",
-                listingId: listingId,
-                startDate: "2025-05-25",
-                endDate: "2025-05-26",
-            };
-            const data = await createBooking(bookingData);
-            alert(`Booking successful!`, data);
-            closeListing();
-        }catch(error) {
-            console.error("Booking failed", error);
-            alert("Booking failed, please try again!")
+    try {
+        // Find the specific listing that matches listingId
+        const listing = listings.find(listing => listing.id === listingId);
+        if (!listing) {
+            throw new Error("Listing not found");
         }
-    };
+
+        if(!currentUser) {
+            alert("Please log in to make a booking");
+        }
+
+        const firstAvailability = listing.availability[1];
+
+        const availableStartDate = firstAvailability?.startDate;
+        
+        const availableEndDate = firstAvailability?.endDate;
+
+        const formatDates = (isoString) => {
+            return new Date(isoString).toISOString().split('T')[0];
+        }
+
+        const bookingData = {
+            userId: currentUser.userId,   // or currentUser.id if you want the logged-in user
+            listingId: listingId,
+            startDate: formatDates(availableStartDate),
+            endDate: formatDates(availableEndDate)
+        };
+        console.log(JSON.parse(JSON.stringify(bookingData)));
+        const data = await createBooking(bookingData);
+        alert(`Booking successful! ${JSON.stringify(data)}`);
+        closeListing();
+    } catch(error) {
+        console.error("Booking failed", error);
+        alert("Booking failed, please try again!");
+    }
+};
 
 
     // After loading the listings from the database, it creates a div for each listing
