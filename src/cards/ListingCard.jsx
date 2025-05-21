@@ -44,9 +44,17 @@ function Listing() {
             const availableStartDate = firstAvailability?.startDate;
             const availableEndDate = firstAvailability?.endDate;
 
+
+        const bookingData = {
+            userId: listing.hostId,   // userId from the currently logged in user
+            listingId: listingId,         // current listing the user wants to book by its id
+            startDate: formatDates(availableStartDate), // dates
+            endDate: formatDates(availableEndDate)
+        };
             const formatDates = (isoString) => {
                 return new Date(isoString).toISOString().split('T')[0];
             }
+
 
             const bookingData = {
                 userId: selectedListing.hostId,
