@@ -161,7 +161,7 @@ const Profile = () => {
               <Card.Header>Your profile</Card.Header>
 
               <Image 
-              src={"https://openclipart.org/image/2000px/247319" }
+              src={userProfile?.profilePic || "https://openclipart.org/image/2000px/247319"}
               roundedCircle 
               fluid/>
 
