@@ -1,29 +1,39 @@
-import '../profile.css';
 import { getUserByUsername } from '../api/profileService';
 import { useContext, useEffect, useState } from 'react';
-import { Container, Row, Col, Card, Button, Image } from 'react-bootstrap'; 
+import { Container, Row, Form, Col, Card, Button, Image } from 'react-bootstrap'; 
 import { AuthContext } from '../contexts/AuthContext'; 
 import { getUserBookings } from '../api/bookingService';
 import { ListGroup } from 'react-bootstrap';
 import { confirmBooking } from '../api/bookingService';
 import { deleteBooking } from '../api/bookingService';
+import { useUser } from '../hooks/useUser';
 
 const Profile = () => {
+  const { userProfile, updateProfile } = useUser();
   const [error, setError] = useState(); // stores errors
   const [ isLoading, setIsLoading ] = useState(false); // display that the site is loading
   const { currentUser } = useContext(AuthContext); // gets the user from the auth context
-  const [ user, setUser ] = useState([]); // stores user profile data
-  const [ bookings, setBookings ] = useState("");
+  const [ user, setUser ] = useState(null); // stores user profile data
+  const [ bookings, setBookings ] = useState([]);
+  const [ isEditing, setIsEditing ] = useState(false);
+  const [success, setSuccess] = useState("");
+  const [formData, setFormData] = useState({
+    firstName: userProfile?.firstName || "",
+    lastName: userProfile?.lastName || "",
+    email: userProfile?.email || "",
+    age: userProfile?.age || "",
+    bio: userProfile?.bio || "",
+    profilePic: userProfile?.profilePic || ""
+    });
 
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true); // initialize loading
-
       try {
         // user data
-        const userData = await getUserByUsername(currentUser?.username); 
-        console.log(userData); // log userData for debugging
-        setUser(userData); // update user state with the fetched data
+        const data = await getUserByUsername(currentUser?.username); 
+        console.log(data); // log userData for debugging
+        setUser(data); // update user state with the fetched data
       } catch (error) {
         setError(error.message); // stores the error if the request isnt working
       } finally {
@@ -34,20 +44,53 @@ const Profile = () => {
     fetchData(); // this executes the data fetching function
   }, [currentUser?.username]); // this is a dependency array, it will update when the username is changed so that a new profile can be shown
 
-  // user listings data
-        
+  // Handle edit
+    const handleEdit = () => {
+      setIsEditing(true);
+    };
+    // Handle input
+    const handleInputChange = (e) => {
+    const {name, value} = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+    };
 
-  // user bookings data
+    // Handle cancel
+    const handleCancel = () => {
+      setFormData({
+        firstName: userProfile?.firstName || "",
+        lastName: userProfile?.lastName || "",
+        email: userProfile?.email || "",
+        age: userProfile?.age || "",
+        bio: userProfile?.bio || "",
+        profilePic: userProfile?.profilePic || ""
+      })
+      setIsEditing(false);
+      setError(null);
+      setSuccess("");
+    };
 
-
-  // user favorites data
-
+    // Handle submit
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      setError(null);
+      setSuccess("");
+      try {
+        await updateProfile(formData);
+        setUser(formData);
+        setSuccess("Profile updated!")
+        setIsEditing(false);
+      } catch (error) {
+        console.log("Profile update failed: " + error);
+      }
+    };
 
   // pending bookings data
   useEffect(() => {
       const fetchBookings = async () => {
         setIsLoading(true);
-
         try {
           const data = await getUserBookings(currentUser?.userId);
           setBookings(data);
@@ -62,7 +105,7 @@ const Profile = () => {
       fetchBookings();
     }, [currentUser.userId]);
 
-    // accept booking
+    // Accept booking
     const accept = async (id) => {
       setIsLoading(true);
       try {
@@ -75,7 +118,7 @@ const Profile = () => {
       }
     };
 
-    // decline booking
+    // Decline booking
     const decline = async (id) => {
       setIsLoading(true);
       try {
@@ -88,6 +131,10 @@ const Profile = () => {
       }
     };
 
+  if (!userProfile) {
+    return <div>Loading profile...</div>
+  }
+
   if (isLoading) {
     return<div>Loading ...</div>; // displays a message to the end user that the site is currently loading
   }
@@ -95,6 +142,94 @@ const Profile = () => {
   if (error) {
     return <div>Something went wrong! Please refresh the page.</div> // displays a message to the end user if something went wrong
   }
+
+  if (isEditing) {
+    console.log("Edit mode - profile.jsx: ", userProfile);
+  return (
+    <Container className="edit-profile mb-5">
+      <h3 className="mb-4">Edit Profile</h3>
+
+        <Form.Group className="mb-3">
+          <Form.Label>First Name:</Form.Label>
+          <Form.Control
+            type="text"
+            name="firstName"
+            value={formData.firstName}
+            disabled={isLoading}
+            onChange={handleInputChange}
+          />
+        </Form.Group>
+
+        <Form.Group className="mb-3">
+          <Form.Label>Last Name:</Form.Label>
+          <Form.Control
+            type="text"
+            name="lastName"
+            value={formData.lastName}
+            disabled={isLoading}
+            onChange={handleInputChange}
+          />
+        </Form.Group>
+
+        <Form.Group className="mb-3">
+          <Form.Label>Email:</Form.Label>
+          <Form.Control
+            type="text"
+            name="email"
+            value={formData.email}
+            disabled={isLoading}
+            onChange={handleInputChange}
+          />
+        </Form.Group>
+
+        <Form.Group className="mb-3">
+          <Form.Label>Age:</Form.Label>
+          <Form.Control
+            type="number"
+            name="age"
+            value={formData.age}
+            disabled={isLoading}
+            onChange={handleInputChange}
+          />
+        </Form.Group>
+
+        <Form onSubmit={handleSubmit}>
+        <Form.Group className="mb-3">
+          <Form.Label>Profile Picture image url:</Form.Label>
+          <Form.Control
+            type="text"
+            name="profilePic"
+            value={formData.profilePic}
+            disabled={isLoading}
+            onChange={handleInputChange}
+          />
+        </Form.Group>
+
+        <Form.Group className="mb-3">
+          <Form.Label>Bio:</Form.Label>
+          <Form.Control
+            as="textarea"
+            name="bio"
+            rows={3}
+            value={formData.bio}
+            disabled={isLoading}
+            onChange={handleInputChange}
+          />
+        </Form.Group>
+
+        {error && <p className="error">{error}</p>}
+        {success && <p className="success">{success}</p>}
+
+        <Button type="submit" variant="primary" disabled={isLoading}>
+          {isLoading ? "Saving..." : "Save Changes"}
+        </Button>
+        <Button type="button" variant="secondary" onClick={handleCancel} disabled={isLoading}>
+          Cancel
+        </Button>
+      </Form>
+    </Container>
+  );
+}
 
   return (
     <Container className="profile-page mb-5">
@@ -117,45 +252,16 @@ const Profile = () => {
               <Card.Subtitle className="mail mb-2">
                 Mail: {" " + user.email}
               </Card.Subtitle>
-              <Card.Subtitle className="phone mb-2">
-                Phone: {" " + user.phone}
-              </Card.Subtitle>
               <Card.Subtitle className="mb-2">
                 Bio: {" " + user.bio}
               </Card.Subtitle>
-              <Button variant="primary" className="mt-2">Edit profile</Button>
-            </Card.Body>
-          </Card>
-        </Col>
-
-        <Col> 
-          {/* Current listings */}
-          <Card className="main-card mb-5">
-            <Card.Header>Current listings</Card.Header>
-            <Card.Body>
-              <Row>
-                
-              </Row>
-            </Card.Body>
-          </Card>
-
-          {/* Previous bookings */}
-          <Card className="main-card mb-5">
-            <Card.Header>Previous bookings</Card.Header>
-            <Card.Body>
-              <Row>
-              
-              </Row>
-            </Card.Body>
-          </Card>
-
-          {/* Favorite listings */}
-          <Card className="main-card mb-5">
-            <Card.Header>Favorite listings</Card.Header>
-            <Card.Body>
-              <Row>
-                
-              </Row>
+              <Button 
+              variant="button" 
+              onClick={handleEdit}  
+              disabled={isLoading}
+              >
+                Edit profile
+              </Button>
             </Card.Body>
           </Card>
         </Col>

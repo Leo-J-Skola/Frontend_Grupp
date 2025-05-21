@@ -57,7 +57,7 @@ function Listing() {
         }
 
         const bookingData = {
-            userId: currentUser.userId,   // userId from the currently logged in user
+            userId: listing.hostId,   // userId from the currently logged in user
             listingId: listingId,         // current listing the user wants to book by its id
             startDate: formatDates(availableStartDate), // dates
             endDate: formatDates(availableEndDate)

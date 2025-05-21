@@ -8,6 +8,7 @@ import Unauthorized from "./pages/Unauthorized";
 import AdminDashboard from "./pages/AdminDashboard";
 import Listing from "./pages/Listing";
 import { AuthProvider } from "./contexts/AuthContext";
+import { UserProvider } from "./contexts/UserContext.jsx";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import HomiHeader from "./components/MyHeader";
 import Footer from "./components/Footer";
@@ -18,6 +19,7 @@ function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
+         <UserProvider>
         <header><HomiHeader></HomiHeader></header>
         <div className="app">
           <main className="main-content">
@@ -43,6 +45,7 @@ function App() {
           </main>
         </div>
         <Footer/>
+        </UserProvider>
       </AuthProvider>
     </BrowserRouter>
   );
