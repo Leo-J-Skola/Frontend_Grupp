@@ -1,5 +1,123 @@
 @import url("https://fonts.googleapis.com/css2?family=Anton+SC&family=Manrope:wght@200..800&display=swap");
 
+.ProfileContainer {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+}
+
+.Title {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #333;
+}
+
+.ErrorMessage {
+  background-color: #ffe6e6;
+  color: #cc0000;
+  padding: 10px 15px;
+  border: 1px solid #cc0000;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.SuccessMessage {
+  background-color: #e6ffea;
+  color: #008000;
+  padding: 10px 15px;
+  border: 1px solid #008000;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.EditForm {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.FormGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.Label {
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #444;
+}
+
+.Input {
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.2s ease;
+}
+
+.Input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.Input:disabled {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+}
+
+.FormActions {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.SaveButton,
+.CancelButton {
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.2s ease;
+}
+
+.SaveButton {
+  background-color: #007bff;
+  color: white;
+}
+
+.SaveButton:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+.CancelButton {
+  background-color: #ccc;
+  color: #333;
+}
+
+.CancelButton:hover:not(:disabled) {
+  background-color: #999;
+}
+
+.SaveButton:disabled,
+.CancelButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+
+
+
+
 body {
     font-family: Arial, sans-serif;
     line-height: 1.6;

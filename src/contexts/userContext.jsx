@@ -12,7 +12,7 @@ export const UserProvider = ({children}) => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        if (auth.currentAuth) {
+        if (auth.currentUser) {
             setUserProfile(auth.currentUser)
         } else {
             setUserProfile(null);
