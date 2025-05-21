@@ -31,12 +31,12 @@ const Profile = () => {
 
     const handleCancel = () => {
       setFormData({
-        profilePic: userProfile?.profilePic || "",
         firstName: userProfile?.firstName || "",
         lastName: userProfile?.lastName || "",
         email: userProfile?.email || "",
         age: userProfile?.age || "",
         bio: userProfile?.bio || "",
+        profilePic: userProfile?.profilePic || ""
       })
 
       setIsEditing(false);
@@ -68,18 +68,6 @@ const Profile = () => {
     <Container className="edit-profile mb-5">
       <h3 className="mb-4">Edit Profile</h3>
 
-      <Form onSubmit={handleSubmit}>
-        <Form.Group className="mb-3">
-          <Form.Label>Profile Picture image url:</Form.Label>
-          <Form.Control
-            type="text"
-            name="profilePic"
-            value={formData.profilePic}
-            disabled={loading}
-            onChange={handleInputChange}
-          />
-        </Form.Group>
-
         <Form.Group className="mb-3">
           <Form.Label>First Name:</Form.Label>
           <Form.Control
@@ -105,7 +93,7 @@ const Profile = () => {
         <Form.Group className="mb-3">
           <Form.Label>Email:</Form.Label>
           <Form.Control
-            type="email"
+            type="text"
             name="email"
             value={formData.email}
             disabled={loading}
@@ -136,8 +124,20 @@ const Profile = () => {
           />
         </Form.Group>
 
-        {error && <p className="text-danger">{error}</p>}
-        {success && <p className="text-success">{success}</p>}
+        <Form onSubmit={handleSubmit}>
+        <Form.Group className="mb-3">
+          <Form.Label>Profile Picture image url:</Form.Label>
+          <Form.Control
+            type="text"
+            name="profilePic"
+            value={formData.profilePic}
+            disabled={loading}
+            onChange={handleInputChange}
+          />
+        </Form.Group>
+
+        {error && <p className="error">{error}</p>}
+        {success && <p className="success">{success}</p>}
 
         <Button type="submit" variant="primary" disabled={loading}>
           {loading ? "Saving..." : "Save Changes"}
@@ -161,16 +161,13 @@ const Profile = () => {
               <Card.Header>Your profile</Card.Header>
 
               <Image 
-              src={userProfile?.profilePic || "https://openclipart.org/image/2000px/247319"}
+              src="https://openclipart.org/image/2000px/247319"
               roundedCircle 
               fluid/>
 
-              <Card.Title className="username mb-2">
-                {userProfile?.username}
-              </Card.Title>
-
               <Card.Title className="fullname mb-2">
-                {userProfile?.firstName + " " }{ userProfile?.lastName} 
+                {userProfile?.firstName + " "}
+                {userProfile?.lastName} 
               </Card.Title>
 
               <Card.Subtitle className="age mb-2">
@@ -181,11 +178,7 @@ const Profile = () => {
                 Mail: {" " + userProfile?.email}
               </Card.Subtitle>
 
-              <Card.Subtitle className="phone mb-2">
-                Phone: {" " + userProfile?.phone}
-              </Card.Subtitle>
-
-              <Card.Subtitle className="mb-2">
+              <Card.Subtitle className="bio mb-2">
                 Bio: {" " + userProfile?.bio}
               </Card.Subtitle>
 
