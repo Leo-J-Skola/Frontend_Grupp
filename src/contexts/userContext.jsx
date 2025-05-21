@@ -26,8 +26,11 @@ export const UserProvider = ({children}) => {
             setUserProfile(response.data);
 
             await auth.checkAuthStatus();
+
+            return response.data;
+
         } catch (error) {
-            setError("Failed to update profile");
+            console.log("Failed to update profile" + error);
         } finally {
             setLoading(false);
         }
@@ -41,5 +44,7 @@ export const UserProvider = ({children}) => {
         setError
     };
 
-    return <UserContext.Provider value={value}>{children}</UserContext.Provider>
-}
+    return (
+    <UserContext.Provider value={value}>{children}</UserContext.Provider>
+    );
+};

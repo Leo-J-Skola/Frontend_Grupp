@@ -21,7 +21,7 @@ const Profile = () => {
     };
 
     const handleInputChange = (e) => {
-    const { name, value } = e.target;
+    const {name, value} = e.target;
     setFormData((prev) => ({
       ...prev,
       [name]: value,
@@ -43,7 +43,7 @@ const Profile = () => {
       setSuccess("");
     };
 
-    const handleSubmit = async () => {
+    const handleSubmit = async (e) => {
       e.preventDefault();
       setError(null);
       setSuccess("");
@@ -58,85 +58,91 @@ const Profile = () => {
     };
 
   if (isEditing) {
+  return (
     <Container className="edit-profile mb-5">
-      <Title>Edit Profile</Title>
+      <h3 className="mb-4">Edit Profile</h3>
 
-      <Form.Group>
-        <Label>Profile Picture:</Label>
-        <Input 
-        type="text" 
-        name="profilePic" 
-        value={formData.profilePic} 
-        disabled={loading} 
-        onChange={handleInputChange}
-        />
+      <Form onSubmit={handleSubmit}>
+        <Form.Group className="mb-3">
+          <Form.Label>Profile Picture:</Form.Label>
+          <Form.Control
+            type="text"
+            name="profilePic"
+            value={formData.profilePic}
+            disabled={loading}
+            onChange={handleInputChange}
+          />
         </Form.Group>
 
-      <Form.Group>
-        <Label>First Name:</Label>
-        <Input 
-        type="text" 
-        name="firstName" 
-        value={formData.firstName} 
-        disabled={loading} 
-        onChange={handleInputChange}
-        />
+        <Form.Group className="mb-3">
+          <Form.Label>First Name:</Form.Label>
+          <Form.Control
+            type="text"
+            name="firstName"
+            value={formData.firstName}
+            disabled={loading}
+            onChange={handleInputChange}
+          />
         </Form.Group>
 
-        <Form.Group>
-        <Label>Last Name:</Label>
-        <Input 
-        type="text" 
-        name="lastName" 
-        value={formData.lastName} 
-        disabled={loading} 
-        onChange={handleInputChange}
-        />
+        <Form.Group className="mb-3">
+          <Form.Label>Last Name:</Form.Label>
+          <Form.Control
+            type="text"
+            name="lastName"
+            value={formData.lastName}
+            disabled={loading}
+            onChange={handleInputChange}
+          />
         </Form.Group>
 
-        <Form.Group>
-        <Label>Email:</Label>
-        <Input 
-        type="email" 
-        name="email" 
-        value={formData.email} 
-        disabled={loading} 
-        onChange={handleInputChange}
-        />
+        <Form.Group className="mb-3">
+          <Form.Label>Email:</Form.Label>
+          <Form.Control
+            type="email"
+            name="email"
+            value={formData.email}
+            disabled={loading}
+            onChange={handleInputChange}
+          />
         </Form.Group>
 
-        <Form.Group>
-        <Label>Age:</Label>
-        <Input 
-        type="number" 
-        name="age" 
-        value={formData.age} 
-        disabled={loading} 
-        onChange={handleInputChange}
-        />
+        <Form.Group className="mb-3">
+          <Form.Label>Age:</Form.Label>
+          <Form.Control
+            type="number"
+            name="age"
+            value={formData.age}
+            disabled={loading}
+            onChange={handleInputChange}
+          />
         </Form.Group>
 
-        <Form.Group>
-        <Label>Bio:</Label>
-        <Input 
-        type="text" 
-        name="bio" 
-        value={formData.bio} 
-        disabled={loading} 
-        onChange={handleInputChange}
-        />
+        <Form.Group className="mb-3">
+          <Form.Label>Bio:</Form.Label>
+          <Form.Control
+            as="textarea"
+            name="bio"
+            rows={3}
+            value={formData.bio}
+            disabled={loading}
+            onChange={handleInputChange}
+          />
         </Form.Group>
 
-        <SaveButton type="submit" disabled={loading}>
-          {loading ? "Saving..." : "Save changes"}
-        </SaveButton>
+        {error && <p className="text-danger">{error}</p>}
+        {success && <p className="text-success">{success}</p>}
 
-        <CancelButton type="button" onClick={handleCancel} disabled={loading}>
+        <Button type="submit" variant="primary" disabled={loading}>
+          {loading ? "Saving..." : "Save Changes"}
+        </Button>{' '}
+        <Button type="button" variant="secondary" onClick={handleCancel} disabled={loading}>
           Cancel
-        </CancelButton>
-
+        </Button>
+      </Form>
     </Container>
-  };
+  );
+}
 
   return (
     <Container className="profile-page mb-5">
@@ -174,10 +180,11 @@ const Profile = () => {
 
               <Button 
               variant="button" 
-              onClick={handleEdit} 
-              text="Edit profile" 
+              onClick={handleEdit}  
               disabled={loading}
-              />
+              >
+                Edit profile
+              </Button>
 
             </Card.Body>
           </Card>
