@@ -3,12 +3,17 @@ import { getUserByUsername } from '../api/profileService';
 import { useContext, useEffect, useState } from 'react';
 import { Container, Row, Col, Card, Button, Image } from 'react-bootstrap'; 
 import { AuthContext } from '../contexts/AuthContext'; 
+import { getUserBookings } from '../api/bookingService';
+import { ListGroup } from 'react-bootstrap';
+import { confirmBooking } from '../api/bookingService';
+import { deleteBooking } from '../api/bookingService';
 
 const Profile = () => {
   const [error, setError] = useState(); // stores errors
   const [ isLoading, setIsLoading ] = useState(false); // display that the site is loading
   const { currentUser } = useContext(AuthContext); // gets the user from the auth context
   const [ user, setUser ] = useState([]); // stores user profile data
+  const [ bookings, setBookings ] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -16,19 +21,9 @@ const Profile = () => {
 
       try {
         // user data
-        const userData = await getUserByUsername(currentUser.username); 
+        const userData = await getUserByUsername(currentUser?.username); 
         console.log(userData); // log userData for debugging
         setUser(userData); // update user state with the fetched data
-
-        // user listings data
-        
-
-        // user bookings data
-        
-
-        // user favorites data
-        
-
       } catch (error) {
         setError(error.message); // stores the error if the request isnt working
       } finally {
@@ -38,6 +33,60 @@ const Profile = () => {
 
     fetchData(); // this executes the data fetching function
   }, [currentUser?.username]); // this is a dependency array, it will update when the username is changed so that a new profile can be shown
+
+  // user listings data
+        
+
+  // user bookings data
+        
+
+  // user favorites data
+
+
+  // pending bookings data
+  useEffect(() => {
+      const fetchBookings = async () => {
+        setIsLoading(true);
+
+        try {
+          const data = await getUserBookings(currentUser?.userId);
+          setBookings(data);
+          console.log(JSON.stringify(data));
+        } catch (error) {
+          console.error("Something went wrong when fetching bookings " +  error)
+        } finally {
+          setIsLoading(false);
+        }
+      };
+
+      fetchBookings();
+    }, [currentUser.userId]);
+
+    // accept booking
+    const accept = async (id) => {
+      setIsLoading(true);
+      try {
+      const data = await confirmBooking(id);
+      setAcceptBooking(data);
+      } catch (error) {
+          console.error("Something went wrong with the booking: " + error)
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    // decline booking
+    const decline = async (id) => {
+      setIsLoading(true);
+      try {
+      const data = await deleteBooking(id);
+      setDeclineBooking(data);
+      } catch (error) {
+          console.error("Something went wrong with the booking: " + error)
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
   if (isLoading) {
     return<div>Loading ...</div>; // displays a message to the end user that the site is currently loading
@@ -53,7 +102,7 @@ const Profile = () => {
         {/* profile information */}
         <Col>
           <Card className="profile-card text-center">
-            <Card.Body>
+            <Card.Body className="userProfileBody">
               <Card.Header>Information</Card.Header>
               <Image 
               src="https://openclipart.org/image/2000px/247319" 
@@ -110,6 +159,36 @@ const Profile = () => {
             </Card.Body>
           </Card>
         </Col>
+
+        {/* Pending bookings */}
+          <Card className="main-card mb-5">
+            <Card.Header>Pending bookings</Card.Header>
+            <Card.Body>
+                {bookings.length > 0 ? (
+                  <ListGroup>
+                    {bookings.map((bookings) => (
+                      <ListGroup.Item key={bookings.id} className="mb-2">
+                        <Card>
+                          <Card.Body>
+                            <Card.Title>Booking id: {bookings.id}</Card.Title>
+                            <Card.Text>
+                              <div>Status: {bookings.status}</div>
+                              <div>Start Date: {new Date(bookings.startDate).toLocaleDateString()}</div>
+                              <div>End Date: {new Date(bookings.endDate).toLocaleDateString()}</div>
+                              <div>Total amount: {bookings.totalAmount} SEK</div>
+                            </Card.Text>
+                            <Button className="accept mb-2" variant="primary" onClick={() => accept(bookings.id)}>Accept</Button>
+                            <Button className="decline mb-2" variant="primary" onClick={() => decline(bookings.id)}>Decline</Button>
+                          </Card.Body>
+                        </Card>
+                      </ListGroup.Item>
+                    ))}
+                  </ListGroup>
+                ) : (
+                  <Card.Text>No pending bookings found</Card.Text>
+                )}
+            </Card.Body>
+          </Card>
       </Row>
     </Container>
   );
