@@ -10,8 +10,13 @@ export const confirmBooking = async (id) => {
     return request.data;
 }
 
+export const deleteBooking = async (id) => {
+    const request = await api.delete(`/booking/${id}`)
+    return request.data;
+}
+
 export const getUserBookings = async (userId) => {
-    const response = await api.get(`/booking/user-bookings${userId}`)
+    const response = await api.get(`/booking/user-bookings/${userId}`)
     return response.data;
 }
 
