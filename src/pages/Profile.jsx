@@ -112,18 +112,6 @@ const Profile = () => {
           />
         </Form.Group>
 
-        <Form.Group className="mb-3">
-          <Form.Label>Bio:</Form.Label>
-          <Form.Control
-            as="textarea"
-            name="bio"
-            rows={3}
-            value={formData.bio}
-            disabled={loading}
-            onChange={handleInputChange}
-          />
-        </Form.Group>
-
         <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3">
           <Form.Label>Profile Picture image url:</Form.Label>
@@ -131,6 +119,18 @@ const Profile = () => {
             type="text"
             name="profilePic"
             value={formData.profilePic}
+            disabled={loading}
+            onChange={handleInputChange}
+          />
+        </Form.Group>
+
+        <Form.Group className="mb-3">
+          <Form.Label>Bio:</Form.Label>
+          <Form.Control
+            as="textarea"
+            name="bio"
+            rows={3}
+            value={formData.bio}
             disabled={loading}
             onChange={handleInputChange}
           />

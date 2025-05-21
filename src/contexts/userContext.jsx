@@ -7,7 +7,7 @@ export const UserContext = createContext();
 export const UserProvider = ({children}) => {
     const auth = useAuth();
 
-    const [userProfile, setUserProfile] = useState(null);
+    const [userProfile, setUserProfile] = useState("");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
