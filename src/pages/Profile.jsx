@@ -23,7 +23,6 @@ const Profile = () => {
     email: userProfile?.email || "",
     age: userProfile?.age || "",
     bio: userProfile?.bio || "",
-    profilePic: userProfile?.profilePic || ""
     });
 
   useEffect(() => {
@@ -65,7 +64,6 @@ const Profile = () => {
         email: userProfile?.email || "",
         age: userProfile?.age || "",
         bio: userProfile?.bio || "",
-        profilePic: userProfile?.profilePic || ""
       })
       setIsEditing(false);
       setError(null);
@@ -193,18 +191,6 @@ const Profile = () => {
           />
         </Form.Group>
 
-        <Form onSubmit={handleSubmit}>
-        <Form.Group className="mb-3">
-          <Form.Label>Profile Picture image url:</Form.Label>
-          <Form.Control
-            type="text"
-            name="profilePic"
-            value={formData.profilePic}
-            disabled={isLoading}
-            onChange={handleInputChange}
-          />
-        </Form.Group>
-
         <Form.Group className="mb-3">
           <Form.Label>Bio:</Form.Label>
           <Form.Control
@@ -216,6 +202,8 @@ const Profile = () => {
             onChange={handleInputChange}
           />
         </Form.Group>
+
+        <Form onSubmit={handleSubmit}>
 
         {error && <p className="error">{error}</p>}
         {success && <p className="success">{success}</p>}
