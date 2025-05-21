@@ -7,6 +7,8 @@ import { getUserBookings } from '../api/bookingService';
 import { ListGroup } from 'react-bootstrap';
 import { confirmBooking } from '../api/bookingService';
 import { deleteBooking } from '../api/bookingService';
+import { getUsersListings } from '../api/profileService';
+import { getUserFavorites } from '../api/profileService';
 
 const Profile = () => {
   const [error, setError] = useState(); // stores errors
@@ -14,6 +16,8 @@ const Profile = () => {
   const { currentUser } = useContext(AuthContext); // gets the user from the auth context
   const [ user, setUser ] = useState([]); // stores user profile data
   const [ bookings, setBookings ] = useState("");
+  const [ listings, setListings ] = useState("");
+  const [ favorites, setFavorites ] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -35,12 +39,44 @@ const Profile = () => {
   }, [currentUser?.username]); // this is a dependency array, it will update when the username is changed so that a new profile can be shown
 
   // user listings data
-        
+  useEffect(() => {
+      const fetchListings = async () => {
+        setIsLoading(true);
 
-  // user bookings data
-        
+        try {
+          const data = await getUsersListings(currentUser?.hostId);
+          setListings(data);
+          console.log(JSON.stringify(data));
+        } catch (error) {
+          console.error("Something went wrong when fetching listings " +  error)
+        } finally {
+          setIsLoading(false);
+        }
+      };
+
+      fetchListings();
+    }, [currentUser?.hostId]);
 
   // user favorites data
+  useEffect(() => {
+      const fetchFavorites = async () => {
+        setIsLoading(true);
+
+        try {
+          const data = await getUserFavorites(currentUser?.userId);
+          setFavorites(data);
+          console.log(JSON.stringify(data));
+        } catch (error) {
+          console.error("Something went wrong when fetching favorites " +  error)
+        } finally {
+          setIsLoading(false);
+        }
+      };
+
+      fetchFavorites();
+    }, [currentUser?.userId]);
+
+  // user bookings data
 
 
   // pending bookings data
@@ -117,9 +153,6 @@ const Profile = () => {
               <Card.Subtitle className="mail mb-2">
                 Mail: {" " + user.email}
               </Card.Subtitle>
-              <Card.Subtitle className="phone mb-2">
-                Phone: {" " + user.phone}
-              </Card.Subtitle>
               <Card.Subtitle className="mb-2">
                 Bio: {" " + user.bio}
               </Card.Subtitle>
@@ -133,19 +166,25 @@ const Profile = () => {
           <Card className="main-card mb-5">
             <Card.Header>Current listings</Card.Header>
             <Card.Body>
-              <Row>
-                
-              </Row>
-            </Card.Body>
-          </Card>
-
-          {/* Previous bookings */}
-          <Card className="main-card mb-5">
-            <Card.Header>Previous bookings</Card.Header>
-            <Card.Body>
-              <Row>
-                
-              </Row>
+              {listings.length > 0 ? (
+                  <ListGroup>
+                    {listings.map((listings) => (
+                      <ListGroup.Item key={listings.id} className="mb-2">
+                        <Card>
+                          <Card.Body>
+                            <Card.Text>
+                              <div>Title: {listings.title}</div>
+                              <div>Description: {listings.description}</div>
+                              <div>Location: {listings.location}</div>
+                            </Card.Text>
+                          </Card.Body>
+                        </Card>
+                      </ListGroup.Item>
+                    ))}
+                  </ListGroup>
+                ) : (
+                  <Card.Text>No listings found</Card.Text>
+                )}
             </Card.Body>
           </Card>
 
@@ -153,11 +192,35 @@ const Profile = () => {
           <Card className="main-card mb-5">
             <Card.Header>Favorite listings</Card.Header>
             <Card.Body>
-              <Row>
-                
-              </Row>
+              {favorites.length > 0 ? (
+                  <ListGroup>
+                    {favorites.map((favorites) => (
+                      <ListGroup.Item key={favorites.id} className="mb-2">
+                        <Card>
+                          <Card.Body>
+                            <Card.Text>
+                              <div>Title: {favorites.title}</div>
+                              <div>Description: {favorites.description}</div>
+                            </Card.Text>
+                          </Card.Body>
+                        </Card>
+                      </ListGroup.Item>
+                    ))}
+                  </ListGroup>
+                ) : (
+                  <Card.Text>No favorites found</Card.Text>
+                )}
             </Card.Body>
           </Card>
+
+          {/* Previous bookings */}
+          <Card className="main-card mb-5">
+            <Card.Header>Previous bookings</Card.Header>
+            <Card.Body>
+              
+            </Card.Body>
+          </Card>
+
         </Col>
 
         {/* Pending bookings */}
