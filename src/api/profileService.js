@@ -9,7 +9,7 @@ export const getUserByUsername = async (username) => {
 
 // update a specific user by username 
 export const updateUser = async (username, userData, token) => {
-  const response = await api.put(`/user/update/${username}`, userData, {
+  const response = await api.put(`/user/update/`, userData, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

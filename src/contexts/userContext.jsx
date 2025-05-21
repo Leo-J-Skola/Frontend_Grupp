@@ -7,13 +7,14 @@ export const UserContext = createContext();
 export const UserProvider = ({children}) => {
     const auth = useAuth();
 
-    const [userProfile, setUserProfile] = useState("");
+    const [userProfile, setUserProfile] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        if (auth.currentUser) {
-            setUserProfile(auth.currentUser)
+        console.log("UserContext - useEffect: ", auth.currentUser); // debugging
+        if (auth?.currentUser) {
+            setUserProfile(auth?.currentUser)
         } else {
             setUserProfile(null);
         }

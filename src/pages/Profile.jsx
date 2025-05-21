@@ -4,6 +4,7 @@ import { Container, Row, Col, Form, Button, Card, Image } from 'react-bootstrap'
 
 const Profile = () => {
   const { userProfile, updateProfile, loading, error, setError } = useUser();
+  console.log("Initial userProfile - profile.jsx: ", userProfile); // for debugging
 
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
@@ -57,14 +58,19 @@ const Profile = () => {
       }
     };
 
+    if (!userProfile) {
+      return <div>Loading profile...</div>
+    }
+
   if (isEditing) {
+    console.log("Edit mode - profile.jsx: ", userProfile);
   return (
     <Container className="edit-profile mb-5">
       <h3 className="mb-4">Edit Profile</h3>
 
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3">
-          <Form.Label>Profile Picture:</Form.Label>
+          <Form.Label>Profile Picture image url:</Form.Label>
           <Form.Control
             type="text"
             name="profilePic"
@@ -144,12 +150,13 @@ const Profile = () => {
   );
 }
 
+  console.log("Before render - profile.jsx:", userProfile);
   return (
     <Container className="profile-page mb-5">
       <Row>
         {/* profile information */}
         <Col>
-          <Card className="profile-card text-center">
+          <Card className="profile-card text-center mb-5 mt-5">
             <Card.Body>
               <Card.Header>Your profile</Card.Header>
 
@@ -158,24 +165,28 @@ const Profile = () => {
               roundedCircle 
               fluid/>
 
+              <Card.Title className="username mb-2">
+                {userProfile?.username}
+              </Card.Title>
+
               <Card.Title className="fullname mb-2">
-                {userProfile.firstName + " " }{ userProfile.lastName} 
+                {userProfile?.firstName + " " }{ userProfile?.lastName} 
               </Card.Title>
 
               <Card.Subtitle className="age mb-2">
-                Age: {" " + userProfile.age}
+                Age: {" " + userProfile?.age}
               </Card.Subtitle>
 
               <Card.Subtitle className="mail mb-2">
-                Mail: {" " + userProfile.email}
+                Mail: {" " + userProfile?.email}
               </Card.Subtitle>
 
               <Card.Subtitle className="phone mb-2">
-                Phone: {" " + userProfile.phone}
+                Phone: {" " + userProfile?.phone}
               </Card.Subtitle>
 
               <Card.Subtitle className="mb-2">
-                Bio: {" " + userProfile.bio}
+                Bio: {" " + userProfile?.bio}
               </Card.Subtitle>
 
               <Button 
@@ -220,7 +231,19 @@ const Profile = () => {
               </Row>
             </Card.Body>
           </Card>
+
         </Col>
+
+        {/* Pending bookings */}
+          <Card className="main-card mb-5 mt-5">
+            <Card.Header>Pending bookings</Card.Header>
+            <Card.Body>
+              <Row>
+                
+              </Row>
+            </Card.Body>
+          </Card>
+
       </Row>
     </Container>
   );
