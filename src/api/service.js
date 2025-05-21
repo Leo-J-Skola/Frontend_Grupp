@@ -14,16 +14,8 @@ export const getListingById = async (id) => {
   return response.data;
 }
 
-// Create listing. Backend using @RequestHeader to authenticate a user, so i need to send the jwt token in the header
-// listingData is just everything relevant inside the listing model (title, rooms, description etc) in backend
-
+// Create a new listing
 export const createListing = async (listingData) => {
-  const token = Cookies.get("jwt"); // get the jwt token from cookies
-  const response = await api.post("/listing/create", listingData, {
-    headers: {
-      Authorization: `Bearer ${token}`, // const token = user jwt token
-      "Content-Type": "application/json",
-    },
-  });
+  const response = await api.post("/listing/create", listingData);
   return response.data;
 }
