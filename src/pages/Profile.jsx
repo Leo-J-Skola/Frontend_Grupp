@@ -1,6 +1,6 @@
 import { getUserByUsername } from '../api/profileService';
 import { useContext, useEffect, useState } from 'react';
-import { Container, Row, Form, Col, Card, Button, Image } from 'react-bootstrap'; 
+import { Container, Form, Card, Button, Image } from 'react-bootstrap'; 
 import { AuthContext } from '../contexts/AuthContext'; 
 import { getUserBookings } from '../api/bookingService';
 import { ListGroup } from 'react-bootstrap';
@@ -203,27 +203,26 @@ const Profile = () => {
           />
         </Form.Group>
 
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit} className="text-center">
+  {error && <p className="error">{error}</p>}
+  {success && <p className="success">{success}</p>}
 
-        {error && <p className="error">{error}</p>}
-        {success && <p className="success">{success}</p>}
-
-        <Button type="submit" variant="primary" disabled={isLoading}>
-          {isLoading ? "Saving..." : "Save Changes"}
-        </Button>
-        <Button type="button" variant="secondary" onClick={handleCancel} disabled={isLoading}>
-          Cancel
-        </Button>
-      </Form>
+  <div className="d-flex justify-content-center gap-3 mt-4">
+    <Button type="submit" variant="success" disabled={isLoading}>
+      {isLoading ? "Saving..." : "Save Changes"}
+    </Button>
+    <Button type="button" variant="secondary" onClick={handleCancel} disabled={isLoading}>
+      Cancel
+    </Button>
+  </div>
+</Form>
     </Container>
   );
 }
 
   return (
-    <Container className="profile-page mb-5">
-      <Row>
+    <Container className="profile-page mb-5"> 
         {/* profile information */}
-        <Col>
           <Card className="profile-card text-center">
             <Card.Body className="userProfileBody">
               <Card.Header>Information</Card.Header>
@@ -252,10 +251,9 @@ const Profile = () => {
               </Button>
             </Card.Body>
           </Card>
-        </Col>
 
         {/* Pending bookings */}
-          <Card className="main-card mb-5">
+          <Card className="main-card text-center mb-5 mt-5">
             <Card.Header>Pending bookings</Card.Header>
             <Card.Body>
                 {bookings.length > 0 ? (
@@ -283,7 +281,6 @@ const Profile = () => {
                 )}
             </Card.Body>
           </Card>
-      </Row>
     </Container>
   );
 };
